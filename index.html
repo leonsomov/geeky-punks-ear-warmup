@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Geeky Punks Ear Warmup</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="brand-head">
+        <img src="geeky-punks-logo.svg" alt="Geeky Punks logo" class="brand-logo" />
+        <div class="brand-text">
+          <h1>Ear Warmup</h1>
+          <p>The Sound of Everything</p>
+        </div>
+      </header>
+
+      <section id="start-screen" class="panel">
+        <h2>Geeky Punks Ear Warmup</h2>
+        <p>10 questions. Each loop plays <strong>Original</strong> then <strong>EQ On</strong>.</p>
+        <p>Every phase lasts 2.5 seconds. Audio keeps looping until you answer.</p>
+        <button id="start-button" class="primary-button" type="button">Start Quiz</button>
+      </section>
+
+      <section id="quiz-screen" class="panel hidden" aria-live="polite">
+        <div class="hud">
+          <div class="hud-block">
+            <span>Score</span>
+            <strong id="live-score">0</strong>
+          </div>
+          <div class="hud-block hud-center">
+            <span>Test</span>
+            <strong id="progress">1/10</strong>
+          </div>
+          <div class="hud-block hud-right">
+            <span>Mode</span>
+            <strong id="loop-status">Original</strong>
+          </div>
+        </div>
+
+        <div class="eq-rail" aria-hidden="true">
+          <span id="eq-off-indicator" class="eq-pill active">EQ Off</span>
+          <span id="eq-on-indicator" class="eq-pill">EQ On</span>
+        </div>
+
+        <p id="prompt" class="prompt"></p>
+        <div id="options" class="options" role="group" aria-label="Answer options"></div>
+        <p class="hint">Loop alternates every 2.5s. Keys: 1 2 3</p>
+        <p id="feedback" class="feedback"></p>
+      </section>
+
+      <section id="result-screen" class="panel hidden">
+        <h2 id="score">Score: 0/10</h2>
+        <h3>Correct Answers</h3>
+        <ol id="review" class="review-list"></ol>
+        <button id="restart-button" class="primary-button" type="button">Run Again</button>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
