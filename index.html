@@ -18,8 +18,7 @@
 
       <section id="start-screen" class="panel">
         <h2>Geeky Punks Ear Warmup</h2>
-        <p>10 questions. Each loop plays <strong>Original</strong> then <strong>EQ On</strong>.</p>
-        <p>Every phase lasts 2.5 seconds. Audio keeps looping until you answer.</p>
+        <p>10 questions. Each loop plays <strong>EQ Off</strong> then <strong>EQ On</strong>. Each segment lasts 2.5 seconds and keeps looping until you answer.</p>
         <button id="start-button" class="primary-button" type="button">Start Quiz</button>
       </section>
 
@@ -30,12 +29,12 @@
             <strong id="live-score">0</strong>
           </div>
           <div class="hud-block hud-center">
-            <span>Test</span>
+            <span>Question</span>
             <strong id="progress">1/10</strong>
           </div>
           <div class="hud-block hud-right">
             <span>Mode</span>
-            <strong id="loop-status">Original</strong>
+            <strong id="loop-status">EQ Off</strong>
           </div>
         </div>
 
@@ -52,7 +51,7 @@
 
       <section id="result-screen" class="panel hidden">
         <h2 id="score">Score: 0/10</h2>
-        <h3>Correct Answers</h3>
+        <h3>Answer Key</h3>
         <ol id="review" class="review-list"></ol>
         <button id="restart-button" class="primary-button" type="button">Run Again</button>
       </section>

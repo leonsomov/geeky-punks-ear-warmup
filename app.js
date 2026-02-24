@@ -17,9 +17,9 @@ const FREQUENCY_POOL = [
 ];
 
 const TYPE_BELL = "bell";
-const TYPE_NOTCH = "notch";
+const TYPE_CUT = "cut";
 const FADE_SECONDS = 0.02;
-const LOOP_ORIGINAL = "original";
+const LOOP_ORIGINAL = "eqOff";
 const LOOP_EQ = "eq";
 
 const state = {
@@ -170,7 +170,7 @@ function setLoopIndicators(phase) {
   if (!dom.loopStatus || !dom.eqOffIndicator || !dom.eqOnIndicator) {
     return;
   }
-  dom.loopStatus.textContent = isEqOn ? "EQ On" : "Original";
+  dom.loopStatus.textContent = isEqOn ? "EQ On" : "EQ Off";
   dom.eqOffIndicator.classList.toggle("active", !isEqOn);
   dom.eqOnIndicator.classList.toggle("active", isEqOn);
 }
@@ -304,7 +304,7 @@ function makeTypeSequence() {
   const notchCount = SETTINGS.questionCount - bellCount;
   return shuffle([
     ...Array.from({ length: bellCount }, () => TYPE_BELL),
-    ...Array.from({ length: notchCount }, () => TYPE_NOTCH)
+    ...Array.from({ length: notchCount }, () => TYPE_CUT)
   ]);
 }
 
@@ -346,9 +346,9 @@ function generateQuiz() {
 
 function questionPrompt(question) {
   if (question.type === TYPE_BELL) {
-    return "Listen to the loop (Original -> Bell Boost). Which center frequency is boosted?";
+    return "Listen to the loop (EQ Off \u2192 Bell Boost). Which center frequency is boosted?";
   }
-  return "Listen to the loop (Original -> Notch Dip). Where is the hole?";
+  return "Listen to the loop (EQ Off \u2192 Bell Cut). Which center frequency is cut?";
 }
 
 function resetRun() {
@@ -451,7 +451,7 @@ function renderResult() {
 
   state.questions.forEach((question, index) => {
     const row = document.createElement("li");
-    const label = question.type === TYPE_BELL ? "Bell boost" : "Notch dip";
+    const label = question.type === TYPE_BELL ? "Bell boost" : "Bell cut";
     row.textContent = `Q${index + 1} ${label}: ${formatFrequency(question.targetHz)}`;
     dom.review.appendChild(row);
   });
@@ -507,7 +507,7 @@ function typeDistribution(questions) {
       acc[q.type] += 1;
       return acc;
     },
-    { [TYPE_BELL]: 0, [TYPE_NOTCH]: 0 }
+    { [TYPE_BELL]: 0, [TYPE_CUT]: 0 }
   );
 }
 
@@ -525,7 +525,7 @@ window.runSelfTest = function runSelfTest(runs = 1) {
     const spacingOk = verifySpacing(quiz);
     const repeatsOk = verifyNoRepeats(quiz);
     const distribution = typeDistribution(quiz);
-    const minEachOk = distribution[TYPE_BELL] >= 4 && distribution[TYPE_NOTCH] >= 4;
+    const minEachOk = distribution[TYPE_BELL] >= 4 && distribution[TYPE_CUT] >= 4;
     const totalOk = quiz.length === SETTINGS.questionCount;
 
     if (!(spacingOk && repeatsOk && minEachOk && totalOk)) {
